@@ -8,9 +8,10 @@ export class CountryResolver {
     createCountry(
         @Arg("code") code: string,
         @Arg("name") name: string,
-        @Arg("emoji") emoji: string
+        @Arg("emoji") emoji: string,
+        @Arg("continent") continent: string
     ){
-        return CountryServices.addCountry(code, name, emoji);
+        return CountryServices.addCountry(code, name, emoji, continent);
     }
 
     @Query(() => [Country])
@@ -23,5 +24,12 @@ export class CountryResolver {
         @Arg("code") code: string
     ){
         return CountryServices.findCountryByCode(code);
+    }
+
+    @Query(() => [Country])
+    getCountriesByContinent(
+        @Arg("continent") continent: string
+    ){
+        return CountryServices.findCountriesByContinent(continent);
     }
 }
